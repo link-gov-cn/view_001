@@ -2,262 +2,177 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>普通货运车辆网上年审凭证</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息</title>
     <style>
         /* 全局重置 */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
-            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: #F5F5F5; /* 浅灰背景色，模拟APP背景 */
             color: #333;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.5;
             display: flex;
-            justify-content: center;
+            justify-content: center; /* 电脑端居中显示 */
             min-height: 100vh;
         }
 
-        .app-container {
+        /* 主容器 */
+        .container {
             width: 100%;
-            max-width: 480px;
-            background-color: #fff;
+            max-width: 600px; /* 限制最大宽度，模拟在电脑上看手机页面的效果 */
+            background-color: #F5F5F5; /* 保持与背景一致 */
+            padding: 20px 0;
             position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
 
-        /* 顶部导航栏 */
-        .nav-bar {
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 12px;
-            border-bottom: 1px solid #f0f0f0;
-            background: #fff;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .nav-title {
-            font-size: 17px;
-            font-weight: 500;
-            color: #000;
-        }
-
-        .nav-icon {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            /* 增加点击时的反馈区域和样式 */
-            transition: opacity 0.1s;
-        }
-        
-        /* 点击图标时产生轻微透明度变化，增加交互感 */
-        .nav-icon:active {
-            opacity: 0.5;
-        }
-
-        .icon-back::before {
-            content: "";
-            display: block;
-            width: 10px;
-            height: 10px;
-            border-left: 2px solid #000;
-            border-bottom: 2px solid #000;
-            transform: rotate(45deg);
-        }
-
-        .nav-right {
-            display: flex;
-            gap: 10px;
-        }
-
-        .icon-dots {
-            font-weight: bold;
-            font-size: 20px;
-            letter-spacing: -2px;
-        }
-        
-        .icon-circle {
-            width: 18px;
-            height: 18px;
-            border: 2px solid #000;
-            border-radius: 50%;
-            position: relative;
-        }
-        .icon-circle::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 6px;
-            height: 6px;
-            background: #000;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-
-        .content {
-            padding: 20px 20px;
-            flex: 1;
-        }
-
-        .page-title {
+        /* 标题部分 */
+        .header {
             text-align: center;
-            font-size: 18px;
+            padding: 15px 20px;
+            background-color: #F5F5F5;
+        }
+
+        .header h1 {
+            font-size: 20px;
             font-weight: 600;
             color: #333;
-            margin-bottom: 15px;
-            padding-top: 10px;
+            letter-spacing: 1px;
         }
 
+        /* 分割线 */
         .divider {
             height: 1px;
-            background-color: #e0e0e0;
-            margin-bottom: 25px;
+            background-color: #E0E0E0;
+            margin: 0;
             width: 100%;
         }
 
-        .info-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        /* 列表内容区域 */
+        .content-list {
+            padding: 20px;
+            flex: 1; /* 让内容区撑开高度 */
         }
 
-        .info-item {
+        /* 单行样式 - 使用Flexbox实现左右布局 */
+        .row {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            font-size: 15px;
+            align-items: flex-start; /* 顶部对齐，防止多行文字导致左侧不居中 */
+            margin-bottom: 22px; /* 行间距 */
         }
 
+        /* 左侧标签 */
         .label {
-            color: #333;
+            color: #333; /* 深色字体 */
+            font-size: 16px;
+            flex-shrink: 0; /* 防止标签被压缩 */
+            margin-right: 15px;
             font-weight: 400;
-            flex-shrink: 0;
-            margin-right: 10px;
         }
 
+        /* 右侧数值 */
         .value {
-            color: #666;
+            color: #666; /* 稍微浅一点的灰色，模拟原图 */
+            font-size: 16px;
             text-align: right;
-            word-break: break-all;
+            word-break: break-all; /* 防止长数字溢出 */
         }
 
-        .val-org {
-            max-width: 200px;
-            line-height: 1.4;
-        }
-
-        .footer-text {
-            text-align: center;
-            color: #999;
-            font-size: 12px;
-            padding: 40px 20px;
-            margin-top: auto;
+        /* 针对"蒙A76490"这种特殊颜色处理，如果不需要可以忽略 */
+        .highlight-text {
+            color: #666;
         }
         
-        .safe-area-bar {
-            height: 4px;
-            width: 130px;
-            background-color: #000;
-            border-radius: 2px;
-            margin: 10px auto 8px auto;
-            opacity: 0.3;
+        /* 底部说明文字 */
+        .footer {
+            text-align: center;
+            padding: 30px 20px 40px; /* 底部留白多一点，模拟iPhone Home条区域 */
+            color: #999;
+            font-size: 14px;
+            margin-top: auto; /* 推到底部 */
         }
 
+        /* 响应式调整：针对超小屏幕 */
+        @media (max-width: 360px) {
+            .label, .value {
+                font-size: 14px;
+            }
+        }
+
+        /* 响应式调整：针对电脑端宽屏 */
+        @media (min-width: 601px) {
+            body {
+                background-color: #E0E0E0; /* 电脑端背景深一点，突出中间的内容 */
+            }
+            .container {
+                background-color: #F5F5F5;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1); /* 加点阴影更有层次感 */
+                min-height: 100vh;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <header class="nav-bar">
-            <div class="nav-icon icon-back" onclick="goBack()"></div>
-            <div class="nav-title">信息</div>
-            <div class="nav-right">
-                <div class="nav-icon icon-dots">•••</div>
-                <div class="nav-icon icon-circle"></div>
-            </div>
+    <div class="container">
+        <header class="header">
+            <h1>普通货运车辆网上年审凭证</h1>
         </header>
+        
+        <div class="divider"></div>
 
-        <main class="content">
-            <h1 class="page-title">普通货运车辆网上年审凭证</h1>
-            <div class="divider"></div>
-
-            <div class="info-list">
-                <div class="info-item">
-                    <span class="label">年审凭证编号</span>
-                    <span class="value">150108001202306260004</span>
-                </div>
-
-                <div class="info-item">
-                    <span class="label">车辆号牌</span>
-                    <span class="value">蒙KB6091(黄色)</span>
-                </div>
-
-                <div class="info-item">
-                    <span class="label">车辆识别代号/VIN</span>
-                    <span class="value">LRDV7PECXJL607106</span>
-                </div>
-
-                <div class="info-item">
-                    <span class="label">道路运输证号</span>
-                    <span class="value">150108003089</span>
-                </div>
-
-                <div class="info-item">
-                    <span class="label">技术等级评定结论</span>
-                    <span class="value">二级</span>
-                </div>
-
-                <div class="info-item">
-                    <span class="label">审验有效期至</span>
-                    <span class="value">2024年06月</span>
-                </div>
-
-                <div class="info-item">
-                    <span class="label">审验机关</span>
-                    <span class="value val-org">呼和浩特市交通运输服务中心<br>综合服务新城办</span>
-                </div>
+        <div class="content-list">
+            <div class="row">
+                <span class="label">年审凭证编号</span>
+                <span class="value">150108001202306260004</span>
             </div>
-        </main>
 
-        <footer>
-            <p class="footer-text">以上为普通货运车辆网上年审凭证所含信息，仅供参考。</p>
-            <div class="safe-area-bar"></div>
+            <div class="row">
+                <span class="label">车辆号牌</span>
+                <span class="value">蒙KB6091(黄色)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">车辆识别代号/VIN</span>
+                <span class="value">LRDV7PECXJL607106</span>
+            </div>
+
+            <div class="row">
+                <span class="label">道路运输证号</span>
+                <span class="value">150108003089</span>
+            </div>
+
+            <div class="row">
+                <span class="label">技术等级评定结论</span>
+                <span class="value">二级</span>
+            </div>
+
+            <div class="row">
+                <span class="label">审验有效期至</span>
+                <span class="value">2026年06月</span>
+            </div>
+
+            <div class="row">
+                <span class="label">审验机关</span>
+                <span class="value">呼和浩特市交通运输服务中心<br>综合服务新城办</span>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>以上为普通货运车辆网上年审凭证所含信息，仅供参考。</p>
+            <br>
+            <div class="home-indicator"></div>
         </footer>
     </div>
-
-    <script>
-        // 返回逻辑函数
-        function goBack() {
-            // 判断是否有浏览历史
-            if (window.history.length > 1) {
-                window.history.back();
-            } else {
-                // 如果没有上一页（例如用户直接打开了这个链接），可以选择关闭窗口或无操作
-                console.log("没有上一页历史记录");
-                window.close(); // 大部分现代浏览器处于安全考虑，不允许脚本关闭非脚本打开的窗口
-                
-                // 作为备选，如果无法返回，可以强制跳转到某个首页（如果需要可取消下方注释）
-                // window.location.href = 'index.html'; 
-            }
-        }
-    </script>
 
 </body>
 </html>
